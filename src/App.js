@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { useStore } from "./context/store";
+import { Routes, Route } from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Header from "./components/Header";
+import Home from "./pages/Home";
+import CreateContainer from "./pages/CreateContainer";
+import { getData } from "./utils/firebaseFuction";
+import { actionTypes } from "./context/reducers";
+
+export default function App() {
+	const [{ user }] = useStore();
+	const [{ foodItems }, dispatch] = useStore();
+
+	const getFoodItems = async () => {
+		await getData().then((data) => {
+			dispatch({
+				type: actionTypes.SET_FOOD_ITEMS,
+				foodItems: data,
+			});
+		});
+	};
+	useEffect(() => {
+		getFoodItems();
+	}, []);
+
+	console.log(user, "how are you doing");
+	return (
+		<>
+			<Header />
+			<Routes>
+				<Route
+					path="/"
+					element={<Home />}
+				/>
+				<Route
+					path="/createContainer"
+					element={<CreateContainer />}
+				/>
+			</Routes>
+		</>
+	);
 }
-
-export default App;
