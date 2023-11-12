@@ -1,4 +1,5 @@
 {
+  "homepage": "http://leyroy.github.io/market-try",
   "name": "test",
   "version": "0.1.0",
   "private": true,
@@ -9,6 +10,7 @@
     "axios": "^1.5.1",
     "firebase": "^10.1.0",
     "framer-motion": "^10.15.0",
+    "gh-pages": "^6.0.0",
     "json-server": "^0.17.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -20,6 +22,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gt-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
