@@ -1,35 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 import Search from "../components/Search";
-import {
-	ref,
-	uploadBytesResumable,
-} from "firebase/storage";
-import { storage } from "../fier_base/fierBase.config";
 
 import delivery from "../Assets/img/delivery.png";
-import f9 from "../Assets/img/f9.png";
 import { staticData } from "../utils/staticHomeData";
 import MainContents from "../components/MainContents";
+import Catcontainer from "../components/Catcontainer";
 
 export default function Home() {
-	const [image, setImage] = useState(null);
+	// const uploadImage = (e) => {
+	// 	const image = e.target.files[0];
+	// 	console.log(image);
+	// 	const imageRef = ref(
+	// 		storage,
+	// 		`Images/${Date.now()}-${image.name}`
+	// 	);
+	// 	const uplaodImages = () => {
+	// 		uploadBytesResumable(imageRef, image);
+	// 	};
 
-	const uploadImage = (e) => {
-		const image = e.target.files[0];
-		console.log(image);
-		const imageRef = ref(
-			storage,
-			`Images/${Date.now()}-${image.name}`
-		);
-		const uplaodImages = () => {
-			uploadBytesResumable(imageRef, image);
-		};
-
-		uplaodImages();
-	};
+	// 	uplaodImages();
+	// };
 	return (
 		<div className=" px-7 md:px-12 pt-16 ">
 			<Search />
+			<Catcontainer />
 			<div className="my-2 ">
 				<h1 className="text-2xl font-extrabold relative before:h-1 before:w-20 before:bg-gradient-to-tr from-yellow-300 to-yellow-700 before:rounded-full -bottom-3 before:-bottom-1 left-0 before:absolute">
 					New Arival{" "}
@@ -65,31 +59,6 @@ export default function Home() {
 						</button>
 					</div>
 					<div className="m-0 md:-mt-10 w-full flex items-center justify-center">
-						{/* <div className="absolute top-0 left-0">
-							<p className="  text-lg font-extrabold tracking-wider relative before:absolute before:bg-yellow-600 before:-bottom-2 before:left-0 before:h-1 before:w-3/4 before:content">
-								Our Hot Dishes
-
-<div className="h-36 w-36 rounded-3xl bg-slate-300 bg-opacity-75 p-1 items-center flex flex-col justify-between">
-							<div className="  -mt-4 w-full h-20 object-cover">
-								<img
-									className=" h-24 w-full"
-									src={f9}
-									alt=""
-								/>
-							</div>
-
-							<div>Icescreams</div>
-							<div className="font-bold text-2xl">
-								<span className="text-red-600 font-normal text-lg">
-									$
-								</span>{" "}
-								45
-							</div>
-						</div>
-
-
-							</p>
-						</div> */}
 						<div className="flex items-center justify-between sm:px-0 px-4 py-3 flex-wrap gap-8 ">
 							{staticData.map((data) => (
 								<div

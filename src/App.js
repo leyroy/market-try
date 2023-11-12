@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import CreateContainer from "./pages/CreateContainer";
 import { getData } from "./utils/firebaseFuction";
 import { actionTypes } from "./context/reducers";
+import { AnimatePresence } from "framer-motion";
 
 export default function App() {
 	const [{ user }] = useStore();

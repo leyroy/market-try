@@ -1,27 +1,50 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { MdShoppingBasket } from "react-icons/md";
+import NotFound from "../Assets/img/NotFound.svg";
+import { motion } from "framer-motion";
+import { actionTypes } from "../context/reducers";
+import { useStore } from "../context/store";
 
 export default function RowContainer({
-	flege,
+	flage,
 	data,
 	scrollValue,
 }) {
-	console.log({ ...data });
+	const [{ catItems }, dispatch] = useStore();
+	const [catItem, setCatItme] = useState([]);
+	const addToCat = () => {
+		dispatch({
+			type: actionTypes.SET_CATITEMS,
+			catItems: catItem,
+		});
+		localStorage.setItem("catItems", JSON.stringify(catItem));
+	};
+
+	useEffect(() => {
+		addToCat();
+	}, [catItem]);
+	// console.log(data);
 
 	useEffect(() => {
 		containerRef.current.scrollLeft += scrollValue;
-		console.log(scrollValue);
 	}, [scrollValue]);
 	const containerRef = useRef();
 	return (
 		<div className="w-full ">
 			<div
 				ref={containerRef}
-				className="flex items-center overflow-scroll gap-3 scroll-smooth"
+				className={`flex items-center ${
+					flage
+						? "overflow-scroll scroll-smooth scrollbar-none"
+						: "flex-wrap"
+				} gap-3 justify-center `}
 			>
-				{data &&
+				{data && data.length > 0 ? (
 					data.map((item) => (
-						<div
+						<motion.div
+							initial={{ scale: 0, x: 200 }}
+							animate={{ scale: 1, x: 0 }}
+							exit={{ scale: 0, x: 200 }}
 							key={item.id}
 							className=" min-w-[300px] h-[200px]  de:min-w-[340px] ms:w-[320px] p-2 my-6 rounded-lg bg-slate-300 hover:drop-shadow-lg backdrop-blur-lg flex justify-between flex-col"
 						>
@@ -31,7 +54,10 @@ export default function RowContainer({
 									alt=""
 									className="w-40 -mt-2 -ml-2 h-28 rounded-md drop-shadow-2xl"
 								/>
-								<div className="w-8 h-8 bg-red-600 text-white flex items-center justify-center rounded-full cursor-pointer">
+								<div
+									onClick={() => setCatItme([...catItems, item])}
+									className="w-8 h-8 bg-red-600 text-white flex items-center justify-center rounded-full cursor-pointer"
+								>
 									<MdShoppingBasket />
 								</div>
 							</div>
@@ -51,8 +77,20 @@ export default function RowContainer({
 									</p>
 								</div>
 							</div>
+						</motion.div>
+					))
+				) : (
+					<div className="flex flex-col justify-center items-center">
+						<img
+							src={NotFound}
+							alt=""
+							className="h-[250px] "
+						/>
+						<div className="text-xl font-semibold text-slate-950 mt-3">
+							Items are currently not available
 						</div>
-					))}
+					</div>
+				)}
 			</div>
 		</div>
 	);

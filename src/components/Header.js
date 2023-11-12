@@ -9,15 +9,16 @@ import { app } from "../fier_base/fierBase.config";
 
 import avatar from "../Assets/img/avatar.png";
 
+import { motion } from "framer-motion";
 import { HiShoppingCart } from "react-icons/hi";
 import { IoMdAdd } from "react-icons/io";
 import { useStore } from "../context/store";
 import { actionTypes } from "../context/reducers";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Header() {
-	const [{ user }, dispatch] = useStore();
-
+	const [{ user, catContainer, catItems }, dispatch] =
+		useStore();
 	const [isMenu, setImenu] = useState(false);
 
 	const auth = getAuth(app);
@@ -46,6 +47,13 @@ function Header() {
 		setImenu(false);
 	};
 
+	const toggleCatContaine = () => {
+		dispatch({
+			type: actionTypes.SET_CATCONTAINER,
+			catContainer: !catContainer,
+		});
+	};
+
 	return (
 		<header className="fixed top-0 left-0 right-0 z-50 w-full px-7 py-2 md:px-16 drop-shadow-md bg-slate-100 ">
 			<div className="items-center justify-between hidden md:flex">
@@ -54,9 +62,12 @@ function Header() {
 				</div>
 				<div>
 					<ul className="flex items-center justify-center gap-9">
-						<li className="text-[#4E0B50] font-bold cursor-pointer hover:text-[#130b13] transition-all ease-in-out duration-100 text-base ">
+						<Link
+							to={"/"}
+							className="text-[#4E0B50] font-bold cursor-pointer hover:text-[#130b13] transition-all ease-in-out duration-100 text-base "
+						>
 							Home
-						</li>
+						</Link>
 						<li className="text-[#4E0B50] font-bold cursor-pointer hover:text-[#130b13] transition-all ease-in-out duration-100 text-base ">
 							Shop
 						</li>
@@ -77,16 +88,57 @@ function Header() {
 							sing in
 						</button>
 					) : (
-						<HiShoppingCart className="text-2xl font-[140px]" />
+						<div className="relative">
+							<HiShoppingCart
+								onClick={toggleCatContaine}
+								className="text-2xl font-[140px] cursor-pointer"
+							/>
+							{catItems && catItems?.length > 0 && (
+								<div className=" -top-3 -right-3 absolute p-2 font-normal h-5 w-5 rounded-full bg-red-700  flex items-center justify-center  ">
+									<p className="text-white text-sm font-semibold">
+										{catItems?.length}
+									</p>
+								</div>
+							)}
+						</div>
 					)}
 
-					<div>
+					<motion.div
+						whileTap={{ scale: 0.75 }}
+						onClick={() => setImenu(!isMenu)}
+						className=" relative "
+					>
 						<img
 							className="object-contain w-8 h-8 rounded-full drop-shadow-md"
 							src={!user ? avatar : user.photoURL}
 							alt=""
 						/>
-					</div>
+						{isMenu && (
+							<div className="right-4 hidden md:flex flex-col w-56 bg-slate-100 backdrop-blur-xl px-5 py-3 rounded-sm absolute z-50">
+								{user && (
+									<Link
+										onClick={() => setImenu(!isMenu)}
+										to={"/createContainer"}
+										className="px-4 group cursor-pointer py-2 bg-slate-100 shadow-orange-300 shadow-lgtext-md font-bold flex w-auto justify-between items-center "
+									>
+										<p className="text-base font-semibold row-auto">
+											Add Products
+										</p>
+										<IoMdAdd className="ml-auto" />
+									</Link>
+								)}
+								<buttom
+									onClick={() => {
+										logOut();
+										setImenu(!isMenu);
+									}}
+									className="w-full px-4 py-2 mb-1 mt-5 font-bold capitalize transition-all duration-300 ease-in-out bg-gray-100 rounded-full drop-shadow-sm hover:bg-gray-200"
+								>
+									Log out
+								</buttom>
+							</div>
+						)}
+					</motion.div>
 				</div>
 			</div>
 
@@ -104,12 +156,28 @@ function Header() {
 						sing in
 					</button>
 				) : (
-					<HiShoppingCart className="text-2xl font-[140px]" />
+					<div className="relative">
+						<HiShoppingCart
+							onClick={toggleCatContaine}
+							className="text-2xl font-[140px] cursor-pointer"
+						/>
+						{catItems && catItems?.length > 0 && (
+							<div className=" -top-3 -right-3 absolute p-2 font-normal h-5 w-5 rounded-full bg-red-700  flex items-center justify-center  ">
+								<p className="text-white text-sm font-semibold">
+									{catItems?.length}
+								</p>
+							</div>
+						)}
+					</div>
 				)}
 				<div className=" relative z-30 flex items-center justify-between gap-6 items8enter">
-					<div onClick={() => setImenu(!isMenu)}>
-						<img
-							className="object-contain w-8 h-8 rounded-full drop-shadow-md"
+					<div
+						onClick={() => setImenu(!isMenu)}
+						className="relative"
+					>
+						<motion.img
+							whileTap={{ scale: 0.7 }}
+							className="object-contain w-8 h-8 rounded-full drop-shadow-md cursor-pointer"
 							src={!user ? avatar : user.photoURL}
 							alt=""
 						/>
@@ -124,7 +192,6 @@ function Header() {
 									>
 										Add Products
 										<IoMdAdd className="ml-4" />
-										<IoMdAdd />
 									</Link>
 								)}
 								<ul className="flex flex-col items-start justify-center gap-5 px-4 py-1 ">
