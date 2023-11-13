@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/market-try/static/css/main.5146f6ff.css",
-    "main.js": "/market-try/static/js/main.a6ffa873.js",
+    "main.css": "/market-try/static/css/main.d0d9a684.css",
+    "main.js": "/market-try/static/js/main.e657b9d7.js",
     "static/media/c3.png": "/market-try/static/media/c3.55f83414f33f66456b35.png",
     "static/media/fi1.png": "/market-try/static/media/fi1.3f43e51b6058550d1f44.png",
     "static/media/f9.png": "/market-try/static/media/f9.339e6fa83bee322c1d10.png",
@@ -11,11 +11,11 @@
     "static/media/emptyCart.svg": "/market-try/static/media/emptyCart.71ad17e692d71caa77c6c9351f84756b.svg",
     "static/media/NotFound.svg": "/market-try/static/media/NotFound.4e90bb93460bfd8d9e2c86b42ef91a4a.svg",
     "index.html": "/market-try/index.html",
-    "main.5146f6ff.css.map": "/market-try/static/css/main.5146f6ff.css.map",
-    "main.a6ffa873.js.map": "/market-try/static/js/main.a6ffa873.js.map"
+    "main.d0d9a684.css.map": "/market-try/static/css/main.d0d9a684.css.map",
+    "main.e657b9d7.js.map": "/market-try/static/js/main.e657b9d7.js.map"
   },
   "entrypoints": [
-    "static/css/main.5146f6ff.css",
-    "static/js/main.a6ffa873.js"
+    "static/css/main.d0d9a684.css",
+    "static/js/main.e657b9d7.js"
   ]
 }
