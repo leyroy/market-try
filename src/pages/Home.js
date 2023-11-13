@@ -5,6 +5,7 @@ import delivery from "../Assets/img/delivery.png";
 import { staticData } from "../utils/staticHomeData";
 import MainContents from "../components/MainContents";
 import Catcontainer from "../components/Catcontainer";
+import Header from "../components/Header";
 
 export default function Home() {
 	// const uploadImage = (e) => {
@@ -22,6 +23,7 @@ export default function Home() {
 	// };
 	return (
 		<div className=" px-7 md:px-12 pt-16 ">
+			<Header />
 			<Search />
 			<Catcontainer />
 			<div className="my-2 ">

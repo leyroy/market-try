@@ -28,7 +28,6 @@ export default function App() {
 	console.log(user, "how are you doing");
 	return (
 		<>
-			<Header />
 			<Routes>
 				<Route
 					path="/"
