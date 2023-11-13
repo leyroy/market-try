@@ -46,7 +46,7 @@ export default function RowContainer({
 							animate={{ scale: 1, x: 0 }}
 							exit={{ scale: 0, x: 200 }}
 							key={item.id}
-							className=" min-w-[300px] h-[200px]  de:min-w-[340px] ms:w-[320px] p-2 my-6 rounded-lg bg-slate-300 hover:drop-shadow-lg backdrop-blur-lg flex justify-between flex-col"
+							className=" min-w-[300px] h-[200px]  de:min-w-[340px] ms:w-[320px] p-2 rounded-lg bg-slate-300 hover:drop-shadow-lg backdrop-blur-lg flex justify-between flex-col"
 						>
 							<div className="w-full flex items-center justify-between rounded-md hover:scale-95 transition-all duration-[1s] ease-in-out">
 								<img
