@@ -127,15 +127,14 @@ function Header() {
 										<IoMdAdd className="ml-auto" />
 									</Link>
 								)}
-								<buttom
-									onClick={() => {
-										logOut();
-										setImenu(!isMenu);
-									}}
-									className="w-full px-4 py-2 mb-1 text-center mt-5 font-bold capitalize transition-all duration-300 ease-in-out bg-gray-100 rounded-full drop-shadow-sm hover:bg-gray-200"
-								>
-									Log out
-								</buttom>
+								<div onClick={() => setImenu(!isMenu)}>
+									<buttom
+										onClick={logOut}
+										className=" cursor-pointer w-full px-4 py-2 mb-1 text-center mt-5 font-bold capitalize transition-all duration-300 ease-in-out bg-gray-100 rounded-full drop-shadow-sm"
+									>
+										Log out
+									</buttom>
+								</div>
 							</div>
 						)}
 					</motion.div>
