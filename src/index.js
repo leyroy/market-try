@@ -12,7 +12,7 @@ const root = reactDom.createRoot(
 );
 
 root.render(
-	<BrowserRouter>
+	<BrowserRouter basename={process.env.PUBLIC_URL}>
 		<ContexProvider
 			initialstate={initialstate}
 			reducer={reducer}
